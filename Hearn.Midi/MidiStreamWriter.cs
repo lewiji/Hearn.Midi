@@ -256,7 +256,7 @@ namespace Hearn.Midi
         /// </summary>
         /// <param name="bpm">Beats per minute</param>
         /// <returns>Current MidiStreamWriter instance</returns>
-        public MidiStreamWriter WriteTempo(int bpm)
+        public MidiStreamWriter WriteTempo(double bpm)
         {
             if (_currentTrack == -1)
             {
@@ -273,7 +273,7 @@ namespace Hearn.Midi
             }
            
             
-            var tempo = MidiEventConstants.MICROSECONDS_PER_MINUTE / bpm;
+            var tempo = (long)Math.Round(MICROSECONDS_PER_MINUTE / bpm, MidpointRounding.AwayFromZero);
 
             _stream.WriteByte(0x00); //Delta time
 
